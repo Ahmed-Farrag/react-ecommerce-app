@@ -1,15 +1,16 @@
 import React from "react";
 import styles from "./Navbar.module.css";
 import logo from "../../assets/images/freshcart-logo.svg";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   return (
     <>
-      <nav class="navbar navbar-expand-sm navbar-light bg-light">
-        <div class="container">
+      <nav className="navbar navbar-expand-sm navbar-light bg-light">
+        <div className="container">
           <img src={logo} alt="" />
           <button
-            class="navbar-toggler d-lg-none"
+            className="navbar-toggler d-lg-none"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#collapsibleNavId"
@@ -17,49 +18,57 @@ export default function Navbar() {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="collapsibleNavId">
-            <ul class="navbar-nav me-auto mt-2 mt-lg-0">
-              <li class="nav-item">
-                <a class="nav-link" href="#">
+          <div className="collapse navbar-collapse" id="collapsibleNavId">
+            <ul className="navbar-nav me-auto mt-2 mt-lg-0">
+              <li className="nav-item">
+                <Link className="nav-link" to="/">
                   Home
-                </a>
+                </Link>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  category
-                </a>
+              <li className="nav-item">
+                <Link className="nav-link" to="cart">
+                  Cart
+                </Link>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  Brands
-                </a>
+              <li className="nav-item">
+                <Link className="nav-link" to="products">
+                  Products
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="categories">
+                  Categories
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="brand">
+                  Brand
+                </Link>
               </li>
             </ul>
-            <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-              <li className="nav-item d-flex align-items-center">
-                <i className="fab mx-2 fa-facebook"></i>
-                <i className="fab mx-2 fa-twitter"></i>
-                <i className="fab mx-2 fa-instgram"></i>
-                <i className="fab mx-2 fa-tiktok"></i>
-                <i className="fab mx-2 fa-linkedin"></i>
-                <i className="fab mx-2 fa-youtube"></i>
+            <ul className="navbar-nav ms-auto mt-2 mt-lg-0">
+              <li classNameName="nav-item d-flex align-items-center">
+                <i classNameName="fab mx-2 fa-facebook"></i>
+                <i classNameName="fab mx-2 fa-twitter"></i>
+                <i classNameName="fab mx-2 fa-instgram"></i>
+                <i classNameName="fab mx-2 fa-tiktok"></i>
+                <i classNameName="fab mx-2 fa-linkedin"></i>
+                <i classNameName="fab mx-2 fa-youtube"></i>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
+              <li className="nav-item">
+                <Link className="nav-link" to="login">
                   Login
-                </a>
+                </Link>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
+              <li className="nav-item">
+                <Link className="nav-link" to="regiser">
                   Register
-                </a>
+                </Link>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  Logout
-                </a>
+              <li className="nav-item">
+                <Link className="nav-link">Logout</Link>
               </li>
             </ul>
           </div>
