@@ -30,9 +30,31 @@ export function CartContextProvider({ children }) {
       .then((response) => response)
       .catch((error) => error);
   }
+  function removeItem(productId) {
+    return axios
+      .delete(
+        `https://route-ecommerce.onrender.com/api/v1/cart/${productId}`,
+
+        { headers: headers }
+      )
+      .then((response) => response)
+      .catch((error) => error);
+  }
+  function updateProduct(productId, count) {
+    return axios
+      .put(
+        `https://route-ecommerce.onrender.com/api/v1/cart/${productId}`,
+        { count: count },
+        { headers: headers }
+      )
+      .then((response) => response)
+      .catch((error) => error);
+  }
 
   return (
-    <CartContext.Provider value={{ addToCart, getLoggedUserCart }}>
+    <CartContext.Provider
+      value={{ addToCart, getLoggedUserCart, removeItem, updateProduct }}
+    >
       {children}
     </CartContext.Provider>
   );

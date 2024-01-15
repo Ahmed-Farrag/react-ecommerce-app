@@ -1,16 +1,34 @@
 import React, { useContext, useEffect, useState } from "react";
 import styles from "./Cart.module.css";
 import { CartContext } from "../../Context/CartContext";
+import toast from "react-hot-toast";
 
 export default function Cart() {
-  let { getLoggedUserCart } = useContext(CartContext);
+  let { getLoggedUserCart, removeItem, updateProduct } =
+    useContext(CartContext);
 
   const [cartDetails, setcartDetails] = useState(null);
+
   async function getCart() {
     let response = await getLoggedUserCart();
     if (response?.data?.status === "success") {
       setcartDetails(response.data.data);
     }
+  }
+  // delete btn
+  async function deleteItem(productId) {
+    let response = await removeItem(productId);
+    setcartDetails(response.data.data);
+    toast("product successed removed");
+    // console.log(response);
+  }
+
+  // update Product Count
+  async function updateProductCount(productId, count) {
+    let response = await updateProduct(productId, count);
+    setcartDetails(response.data.data);
+    toast("product count updated");
+    // console.log(response);
   }
   useEffect(() => {
     getCart();
@@ -25,7 +43,10 @@ export default function Cart() {
             Total Cart Price: {cartDetails.totalCartPrice} EGP
           </h6>
           {cartDetails.products.map((product) => (
-            <div className="row align-items-center border-bottom py-2 my-2">
+            <div
+              key={product.product._id}
+              className="row align-items-center border-bottom py-2 my-2"
+            >
               <div className="col-md-1">
                 <img
                   src={product.product.imageCover}
@@ -37,14 +58,31 @@ export default function Cart() {
                 <div>
                   <h6>{product.product.title}</h6>
                   <h6 className="text-main">Price: {product.price}</h6>
-                  <button className="btn m-0 p-0">
-                    <i className="fa-regular text-main fa-trash-can"></i>Remove
+                  <button
+                    onClick={() => deleteItem(product.product._id)}
+                    className="btn m-0 p-0"
+                  >
+                    <i className="fa-regular text-main fa-trash-can"></i> Remove
                   </button>
                 </div>
                 <div>
-                  <button className="btn border-main btn-sm">+</button>
+                  <button
+                    onClick={() =>
+                      updateProductCount(product.product._id, product.count + 1)
+                    }
+                    className="btn border-main btn-sm"
+                  >
+                    +
+                  </button>
                   <span className="mx-2">{product.count}</span>
-                  <button className="btn border-main btn-sm">-</button>
+                  <button
+                    onClick={() =>
+                      updateProductCount(product.product._id, product.count - 1)
+                    }
+                    className="btn border-main btn-sm"
+                  >
+                    -
+                  </button>
                 </div>
               </div>
             </div>
