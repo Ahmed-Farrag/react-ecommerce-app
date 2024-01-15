@@ -14,6 +14,9 @@ import { jwtDecode } from "jwt-decode";
 import { useState } from "react";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
+import { ConterContextProvider } from "./Context/CounterContext";
+import { CartContextProvider } from "./Context/CartContext";
+import toast, { Toaster } from "react-hot-toast";
 
 function App() {
   const [UserData, setUserData] = useState(null);
@@ -76,7 +79,12 @@ function App() {
     },
   ]);
 
-  return <RouterProvider router={routers}></RouterProvider>;
+  return (
+    <CartContextProvider>
+      <Toaster />
+      <RouterProvider router={routers}></RouterProvider>
+    </CartContextProvider>
+  );
 }
 
 export default App;
