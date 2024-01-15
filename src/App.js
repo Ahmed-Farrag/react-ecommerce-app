@@ -10,24 +10,72 @@ import Login from "./components/Login//Login";
 import Register from "./components/Register/Register";
 import NotFound from "./components/NotFound/NotFound";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+import { useState } from "react";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import ProductDetails from "./components/ProductDetails/ProductDetails";
 
-let routers = createBrowserRouter([
-  {
-    path: "",
-    element: <Layout />,
-    children: [
-      { index: true, element: <Home /> },
-      { path: "products", element: <Products /> },
-      { path: "cart", element: <Cart /> },
-      { path: "about", element: <About /> },
-      { path: "categories", element: <Categories /> },
-      { path: "login", element: <Login /> },
-      { path: "register", element: <Register /> },
-      { path: "*", element: <NotFound /> },
-    ],
-  },
-]);
 function App() {
+  const [UserData, setUserData] = useState(null);
+  function saveuserData() {
+    let encodedToken = localStorage.getItem("userToken");
+    let decodedToken = jwtDecode(encodedToken);
+    setUserData(decodedToken);
+  }
+
+  let routers = createBrowserRouter([
+    {
+      path: "",
+      element: <Layout UserData={UserData} />,
+      children: [
+        { index: true, element: <Home /> },
+        {
+          path: "products",
+          element: (
+            <ProtectedRoute>
+              <Products />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "cart",
+          element: (
+            <ProtectedRoute>
+              <Cart />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "about",
+          element: (
+            <ProtectedRoute>
+              <About />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "categories",
+          element: (
+            <ProtectedRoute>
+              <Categories />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "productdetails/:id",
+          element: (
+            <ProtectedRoute>
+              <ProductDetails />
+            </ProtectedRoute>
+          ),
+        },
+        { path: "login", element: <Login saveuserData={saveuserData} /> },
+        { path: "register", element: <Register /> },
+        { path: "*", element: <NotFound /> },
+      ],
+    },
+  ]);
+
   return <RouterProvider router={routers}></RouterProvider>;
 }
 
