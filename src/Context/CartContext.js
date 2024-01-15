@@ -8,7 +8,7 @@ export function CartContextProvider({ children }) {
   let headers = {
     token: localStorage.getItem("userToken"),
   };
-  async function addToCart(productId) {
+  function addToCart(productId) {
     return axios
       .post(
         `https://route-ecommerce.onrender.com/api/v1/cart`,
@@ -20,9 +20,19 @@ export function CartContextProvider({ children }) {
       .then((response) => response)
       .catch((error) => error);
   }
+  function getLoggedUserCart() {
+    return axios
+      .get(
+        `https://route-ecommerce.onrender.com/api/v1/cart`,
+
+        { headers: headers }
+      )
+      .then((response) => response)
+      .catch((error) => error);
+  }
 
   return (
-    <CartContext.Provider value={{ addToCart }}>
+    <CartContext.Provider value={{ addToCart, getLoggedUserCart }}>
       {children}
     </CartContext.Provider>
   );
