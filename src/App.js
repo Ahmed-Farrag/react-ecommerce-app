@@ -17,6 +17,7 @@ import ProductDetails from "./components/ProductDetails/ProductDetails";
 import { ConterContextProvider } from "./Context/CounterContext";
 import { CartContextProvider } from "./Context/CartContext";
 import toast, { Toaster } from "react-hot-toast";
+import Checkout from "./components/checkout/checkout";
 
 function App() {
   const [UserData, setUserData] = useState(null);
@@ -61,6 +62,14 @@ function App() {
           element: (
             <ProtectedRoute>
               <Categories />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "checkout",
+          element: (
+            <ProtectedRoute>
+              <Checkout />
             </ProtectedRoute>
           ),
         },

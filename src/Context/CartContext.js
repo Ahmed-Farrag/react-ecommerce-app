@@ -50,10 +50,26 @@ export function CartContextProvider({ children }) {
       .then((response) => response)
       .catch((error) => error);
   }
+  function onlinePayment(cartId, shippingAddress) {
+    return axios
+      .post(
+        `https://route-ecommerce.onrender.com/api/v1/orders/checkout-session/${cartId}?url=http://localhost:3000`,
+        { shippingAddress: shippingAddress },
+        { headers: headers }
+      )
+      .then((response) => response)
+      .catch((error) => error);
+  }
 
   return (
     <CartContext.Provider
-      value={{ addToCart, getLoggedUserCart, removeItem, updateProduct }}
+      value={{
+        addToCart,
+        getLoggedUserCart,
+        removeItem,
+        updateProduct,
+        onlinePayment,
+      }}
     >
       {children}
     </CartContext.Provider>

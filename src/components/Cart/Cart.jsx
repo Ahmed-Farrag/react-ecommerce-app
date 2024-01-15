@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import styles from "./Cart.module.css";
 import { CartContext } from "../../Context/CartContext";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 export default function Cart() {
   let { getLoggedUserCart, removeItem, updateProduct } =
@@ -87,6 +88,11 @@ export default function Cart() {
               </div>
             </div>
           ))}
+          <button className="btn bg-main">
+            <Link className="text-white" to={"/checkout"}>
+              checkout
+            </Link>
+          </button>
         </div>
       ) : null}
 
