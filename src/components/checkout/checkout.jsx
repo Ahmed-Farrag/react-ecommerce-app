@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
-// import styles from "./Checkout.module.css";
+import styles from "./checkout.module.css";
 import { useFormik } from "formik";
 import { CartContext } from "../../Context/CartContext";
 
 export default function Checkout() {
-  let { onlinePayment } = useContext(CartContext);
+  let { onlinePayment, cartId } = useContext(CartContext);
 
   async function handleSubmit(values) {
-    let response = await onlinePayment("65a50e20fcbff3003494dd63", values);
+    let response = await onlinePayment(cartId, values);
     if (response?.data?.status === "success") {
       window.location.href = response.data.session.url;
     }

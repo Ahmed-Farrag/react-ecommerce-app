@@ -1,10 +1,26 @@
 import axios from "axios";
 
-const { createContext } = require("react");
+const { createContext, useEffect, useState } = require("react");
 
 export let CartContext = createContext();
 
 export function CartContextProvider({ children }) {
+  // make productId dynamic
+  const [cartId, setcartId] = useState(null);
+  const [numOfCartItems, setnumOfCartItems] = useState(0);
+  async function getCart() {
+    let response = await getLoggedUserCart();
+    if (response?.data?.status === "success") {
+      setnumOfCartItems(response.data.numOfCartItems);
+      setcartId(response.data.data._id);
+    }
+    console.log(response);
+  }
+
+  useEffect(() => {
+    getCart();
+  }, []);
+
   let headers = {
     token: localStorage.getItem("userToken"),
   };
@@ -64,6 +80,9 @@ export function CartContextProvider({ children }) {
   return (
     <CartContext.Provider
       value={{
+        cartId,
+        numOfCartItems,
+        setnumOfCartItems,
         addToCart,
         getLoggedUserCart,
         removeItem,

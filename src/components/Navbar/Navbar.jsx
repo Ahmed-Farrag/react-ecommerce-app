@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./Navbar.module.css";
 import logo from "../../assets/images/freshcart-logo.svg";
 import { Link } from "react-router-dom";
+import { CartContext } from "../../Context/CartContext";
 
 export default function Navbar({ UserData }) {
+  let { numOfCartItems } = useContext(CartContext);
   return (
     <>
-      <nav className="navbar navbar-expand-sm navbar-light bg-light">
+      <nav className="navbar fixed-top navbar-expand-sm navbar-light bg-light">
         <div className="container">
           <img src={logo} alt="" />
           <button
@@ -28,11 +30,7 @@ export default function Navbar({ UserData }) {
                     Home
                   </Link>
                 </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="cart">
-                    Cart
-                  </Link>
-                </li>
+
                 <li className="nav-item">
                   <Link className="nav-link" to="products">
                     Products
@@ -74,9 +72,19 @@ export default function Navbar({ UserData }) {
                   </li>
                 </>
               ) : (
-                <li className="nav-item">
-                  <Link className="nav-link">Logout</Link>
-                </li>
+                <>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="cart">
+                      <i className="fas fa-shopping-cart fa-lg"></i>
+                      <span className="badge bg-main text-white">
+                        {numOfCartItems}
+                      </span>
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link">Logout</Link>
+                  </li>
+                </>
               )}
             </ul>
           </div>

@@ -6,12 +6,12 @@ import { Outlet } from "react-router-dom";
 
 export default function Layout({ UserData }) {
   return (
-    <>
+    <div className="pt-5">
       <Navbar UserData={UserData} />
       <div className="container">
         <Outlet></Outlet>
       </div>
       <Footer />
-    </>
+    </div>
   );
 }

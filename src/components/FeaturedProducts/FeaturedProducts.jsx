@@ -8,12 +8,14 @@ import toast from "react-hot-toast";
 export default function FeaturedProducts() {
   const [products, setProducts] = useState([]);
   // cart
-  let { addToCart } = useContext(CartContext);
+  let { addToCart, setnumOfCartItems } = useContext(CartContext);
 
   async function addProduct(productId) {
     let response = await addToCart(productId);
     // toaster
     if (response?.data?.status === "success") {
+      setnumOfCartItems(response.data.numOfCartItems);
+      //
       toast.success(response.data.message, { duration: 2000 });
     } else {
       toast.error("Error", { duration: 2000 });
