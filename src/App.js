@@ -18,6 +18,7 @@ import { ConterContextProvider } from "./Context/CounterContext";
 import { CartContextProvider } from "./Context/CartContext";
 import toast, { Toaster } from "react-hot-toast";
 import Checkout from "./components/checkout/checkout";
+import { Offline, Online } from "react-detect-offline";
 
 function App() {
   const [UserData, setUserData] = useState(null);
@@ -90,6 +91,11 @@ function App() {
 
   return (
     <CartContextProvider>
+      <Offline>
+        <div className="network">
+          (Take Care You are Offline!) Check You Network Connection
+        </div>
+      </Offline>
       <Toaster />
       <RouterProvider router={routers}></RouterProvider>
     </CartContextProvider>
