@@ -3,9 +3,14 @@ import styles from "./Navbar.module.css";
 import logo from "../../assets/images/freshcart-logo.svg";
 import { Link } from "react-router-dom";
 import { CartContext } from "../../Context/CartContext";
+import { useDispatch, useSelector } from "react-redux";
+import { decrease } from "../../Redux/CounterSlice";
 
 export default function Navbar({ UserData }) {
   let { numOfCartItems } = useContext(CartContext);
+
+  let { counter } = useSelector((state) => state.counter);
+  let dispatch = useDispatch(decrease);
   return (
     <>
       <nav className="navbar fixed-top navbar-expand-sm navbar-light bg-light">
@@ -27,9 +32,10 @@ export default function Navbar({ UserData }) {
               <ul className="navbar-nav me-auto mt-2 mt-lg-0">
                 <li className="nav-item">
                   <Link className="nav-link" to="/">
-                    Home
+                    Home{counter}
                   </Link>
                 </li>
+                <button onClick={() => dispatch(decrease())}>-</button>
 
                 <li className="nav-item">
                   <Link className="nav-link" to="products">

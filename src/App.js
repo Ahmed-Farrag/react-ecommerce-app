@@ -19,6 +19,8 @@ import { CartContextProvider } from "./Context/CartContext";
 import toast, { Toaster } from "react-hot-toast";
 import Checkout from "./components/checkout/checkout";
 import { Offline, Online } from "react-detect-offline";
+import { Provider } from "react-redux";
+import { store } from "./Redux/Store";
 
 function App() {
   const [UserData, setUserData] = useState(null);
@@ -90,15 +92,17 @@ function App() {
   ]);
 
   return (
-    <CartContextProvider>
-      <Offline>
-        <div className="network">
-          (Take Care You are Offline!) Check You Network Connection
-        </div>
-      </Offline>
-      <Toaster />
-      <RouterProvider router={routers}></RouterProvider>
-    </CartContextProvider>
+    <Provider store={store}>
+      <CartContextProvider>
+        <Offline>
+          <div className="network">
+            (Take Care You are Offline!) Check You Network Connection
+          </div>
+        </Offline>
+        <Toaster />
+        <RouterProvider router={routers}></RouterProvider>
+      </CartContextProvider>
+    </Provider>
   );
 }
 
