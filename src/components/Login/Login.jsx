@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 export default function Login({ saveuserData }) {
   let navigate = useNavigate(); //navigate to login
   const [isLoading, setIsLoading] = useState(false); // spinner
@@ -55,6 +56,9 @@ export default function Login({ saveuserData }) {
   });
   return (
     <>
+      <Helmet>
+        <title>LogIn Details</title>
+      </Helmet>
       <div className="w-75 mx-auto py-4">
         <h3> Login Now:</h3>
         {/* for handle error */}

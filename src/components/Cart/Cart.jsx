@@ -3,6 +3,7 @@ import styles from "./Cart.module.css";
 import { CartContext } from "../../Context/CartContext";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 export default function Cart() {
   let { getLoggedUserCart, removeItem, updateProduct } =
@@ -37,6 +38,9 @@ export default function Cart() {
 
   return (
     <>
+      <Helmet>
+        <title>Cart Details</title>
+      </Helmet>
       {cartDetails !== null ? (
         <div className="bg-main-light p-4 my-4">
           <h3>Shop Cart: </h3>

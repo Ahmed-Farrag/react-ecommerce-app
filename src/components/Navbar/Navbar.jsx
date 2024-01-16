@@ -41,11 +41,6 @@ export default function Navbar({ UserData }) {
                     Categories
                   </Link>
                 </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="brand">
-                    Brand
-                  </Link>
-                </li>
               </ul>
             ) : null}
 

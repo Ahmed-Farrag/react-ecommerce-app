@@ -8,7 +8,7 @@ export default function Layout({ UserData }) {
   return (
     <div className="pt-5">
       <Navbar UserData={UserData} />
-      <div className="container">
+      <div className="container mt-3">
         <Outlet></Outlet>
       </div>
       <Footer />

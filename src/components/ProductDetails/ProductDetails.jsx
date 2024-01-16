@@ -3,6 +3,7 @@ import styles from "./ProductDetails.module.css";
 import { useParams } from "react-router-dom";
 import Slider from "react-slick";
 import axios from "axios";
+import { Helmet } from "react-helmet";
 
 export default function ProductDetails() {
   const [productDetails, setproductDetails] = useState(null);
@@ -32,6 +33,9 @@ export default function ProductDetails() {
   }, []);
   return (
     <>
+      <Helmet>
+        <title>Products Details</title>
+      </Helmet>
       <div className="row justify-content-center align-items-center py-3">
         {isLoading ? (
           <div className="text-center">
